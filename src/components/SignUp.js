@@ -2,8 +2,8 @@ import Form from '../styles/Form';
 import Page from '../styles/Page';
 import { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
-import { postSignUp } from '../services/my-pets';
-//import logo from '../assets/logo.png';
+import { postSignUp } from '../services/for-pets';
+import logo from '../assets/logo.png';
 import Logo from '../styles/Logo';
 
 export default function SignUp() {
@@ -51,7 +51,7 @@ export default function SignUp() {
 
     return (
         <Page page='SignUp'>   
-            {/* <img src={logo} alt='logo' /> */}
+            <Logo src={logo} alt='logo' />
             
             <Form onSubmit={handleSubmit}>
             <input 

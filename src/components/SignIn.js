@@ -1,11 +1,11 @@
 import Form from '../styles/Form';
 import Page from '../styles/Page';
-//import logo from '../assets/logo.png';
+import logo from '../assets/logo.png';
 import Logo from '../styles/Logo';
 import UserContext from "../contexts/UserContext";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
-import { postSignIn } from '../services/my-pets';
+import { postSignIn } from '../services/for-pets';
 
 export default function SignIn() {
     const { setUser } = useContext(UserContext);
@@ -50,7 +50,7 @@ export default function SignIn() {
 
     return (
         <Page page='SignIn'>   
-            {/* <img src={logo} alt='logo' /> */}
+            <Logo src={logo} alt='logo' />
             
             <Form onSubmit={handleSubmit}>
                 <input 
