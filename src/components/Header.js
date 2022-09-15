@@ -49,7 +49,7 @@ const HeaderBar = styled.div`
     align-items: center;
     justify-content: space-between;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     padding: 0 25px;

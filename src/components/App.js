@@ -43,7 +43,9 @@ function Root() {
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/home/" element={<Home />} />
+          <Route path="/home/:for" element={<Home />} />
+          <Route path="/home/:for/:type" element={<Home />} />
         </Routes>
       </>
     </UserContext.Provider>
