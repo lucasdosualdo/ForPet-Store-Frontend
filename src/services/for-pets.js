@@ -3,7 +3,7 @@ import axios from 'axios';
 const BASE_URL = 'http://localhost:5000';
 
 function postSignIn(body) {
-    return axios.post(`${BASE_URL}/auth/sign-in`, body);
+    return axios.post(`${BASE_URL}/sign-in`, body);
 }
 
 function getSession(token) {
@@ -15,7 +15,7 @@ function getSession(token) {
 }
 
 function postSignUp(body) {
-    return axios.post(`${BASE_URL}/auth/sign-up`, body);
+    return axios.post(`${BASE_URL}/sign-up`, body);
 }
 
 function deleteLogout(token) {
