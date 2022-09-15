@@ -11,36 +11,10 @@ import Peixes from '../assets/Peixes.png';
 import Répteis from '../assets/Répteis.png';
 import Roedores from '../assets/Roedores.png';
 
-
 export default function Home () {
     const { user } = useContext(UserContext);
     const navigate = useNavigate();
     const [items, setItems] = useState([]);
-
-    const ITEMS = [
-        {
-          name: "Sachê Purina One Gatos Adultos e Filhotes Sabor Salmão Atum e Peixe Branco MultiProteínas Nestlé Purina 85g - 15 un",
-          type: "Alimentos",
-          for: "Gatos",
-          about:
-            "A Ração Úmida Nestlé Purina One Salmão, Atum e Peixe Branco para Gatos Adultos e Filhotes é um alimento super premium com multi proteínas que garantem nutrição na medida certa para o seu pet.",
-          price: "80.29",
-          brand: "Purina ONE, Nestlé Purina",
-          image:
-            "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/545/822/products/2hnawtsd4h5f52wffhbekkmg-7fa0090b833cc38f5f16472647273784-1024-1024.jpg",
-        },
-        {
-          name: "Ração Seca Purina Gatsy Sabor Carne Para Gatos Nestlé Purina - 20kg",
-          type: "Alimentos",
-          for: "Gatos",
-          about:
-            "PURINA Gatsy é um alimento completo e balanceado que, além de saboroso, possui ingredientes que seu gato precisa para se manter saudável: carne, vitaminas e minerais.",
-          price: "256.48",
-          brand: "Gatsy",
-          image:
-            "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/545/822/products/j3dyhhxwiujvfexbfkwp4rvw-5074369238aef7884616424451668239-1024-1024.jpg",
-        }
-    ]
 
     function loadItems() {
         const promise = getItems(user.token);
@@ -54,6 +28,10 @@ export default function Home () {
         });
     }
 
+    useEffect(() => {
+        loadItems();
+    }, []);
+
     return (
         <Page page='home'>
             <OptionBar>
@@ -66,7 +44,7 @@ export default function Home () {
             </OptionBar>
 
             <ItemsList>
-                <List ITEMS={ITEMS} />
+                <List items={items} />
             </ItemsList>
         </Page>
     )
@@ -87,20 +65,24 @@ function Item({ info }) {
             <img src={info.image} />
             <h5>{info.name}</h5>
             <span>
-                <h4>{info.price}</h4>
+                <h4>{`R$ ${info.price.replace('.', ',')}`}</h4>
                 <ion-icon name='heart'></ion-icon>
             </span>
         </div>
     );
 }
 
-function List({ ITEMS }) {
+function List({ items }) {
+    function comparator() { 
+        return Math.random() - 0.5; 
+    }
+    
     return (
         <>
-            {ITEMS.lenght === 0 ? (
+            {items.lenght === 0 ? (
                 <p>Não foi possível encontrar nenhum item disponível para a categoria selecionada.</p>
             ) : (
-                ITEMS.map((item, index) => (
+                items.sort(comparator).map((item, index) => (
                     <Item 
                         key={index}
                         info={item} 
@@ -114,7 +96,7 @@ const OptionBar = styled.div`
     display: flex;
     justify-content: start;
     align-items: center;
-    padding: 5px 5px;
+    padding: 10px 5px;
     overflow-x: scroll;
     border-color: #ffeed1;
     border-style: solid;
@@ -123,7 +105,7 @@ const OptionBar = styled.div`
     width: inherit;
     position: fixed;
     left: 0;
-    top: 90px;
+    top: 80px;
     z-index: 1;
 
     div {
@@ -163,21 +145,50 @@ const ItemsList = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 140px;
+    margin: 140px 0 80px 0;
     
     div {
         width: 80%;
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 10px;
-        margin: 20px 0;
+        padding: 15px;
+        margin: 10px 0;
         background-color: white;
+        border-radius: 10px;
+        border: 1px solid #ffeed1;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
     }
 
     span {
         display: flex;
         width: 100%;
         justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    img {
+        width: inherit;
+        margin-bottom: 15px;
+    }
+
+    ion-icon {
+        color: #cacaca;
+    }
+
+    h5 {
+        color: #A6A6A6;
+        font-size: 14px;
+        line-height: 18px;
+        text-align: left;
+        width: 100%;
+        word-wrap: break-word
+    }
+
+    h4 {
+        color: #A6A6A6;
+        font-size: 18px;
+        font-weight: 700;
     }
 `;

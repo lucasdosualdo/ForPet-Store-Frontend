@@ -18,7 +18,7 @@ export default function Header() {
     }
 
     function goBack() {
-        if(path.includes('home')) {
+        if(path === '/home') {
             return;
         }
 
@@ -53,7 +53,7 @@ const HeaderBar = styled.div`
     left: 0;
     top: 0;
     padding: 0 25px;
-    z-index: 1;
+    z-index: 2;
     
     h1 {
     font-size: 32px;
@@ -64,6 +64,6 @@ const HeaderBar = styled.div`
     }
 
     ion-icon[name='chevron-back-outline'] {
-        opacity: ${props => props.page.includes('home') ? '10%' : '100%'};
+        opacity: ${props => props.page === '/home' ? '10%' : '100%'};
     }
 `;
