@@ -26,9 +26,18 @@ function deleteLogout(token) {
     });
 }
 
+function getItems(token) {
+    return axios.get(`${BASE_URL}/items`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+}
+
 export {
     postSignIn,
     getSession,
     postSignUp,
     deleteLogout,
+    getItems
 };
