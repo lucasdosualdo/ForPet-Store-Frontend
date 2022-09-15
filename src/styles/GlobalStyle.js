@@ -50,6 +50,29 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+.root {
+    max-width: 800px;
+    min-width: 300px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    position: relative;
+}
+
+* {
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 400;
+    box-sizing: border-box;
+}
+
+ion-icon {
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
 `;
 
 export default GlobalStyle;
