@@ -40,7 +40,7 @@ export default function SignIn() {
                 token: answer.data.token
             }));
 
-            navigate('/painel');
+            navigate('/home');
         });
 
         promise.catch(answer => {

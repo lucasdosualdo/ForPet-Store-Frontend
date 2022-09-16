@@ -1,46 +1,26 @@
 import styled from 'styled-components';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import currentPage from '../functions/currentPage';
 
 export default function Menu() {
     const path = useLocation().pathname;
-    const navigate = useNavigate();
     let page = currentPage(path);
 
     if(page === 'ForPets') {
         page = 'Início';
     }
 
-    function goTo(destination) {
-        let route;
-        if(destination === 'Favoritos') {
-            route = '/favorites';
-        }
-        
-        if(destination === 'Histórico') {
-            route = '/history';
-        }
-        
-        if(destination === 'Carrinho') {
-            route = '/cart';
-        } 
-        
-        if(destination === 'Início') {
-            route = '/home';
-        }
-
-        if(destination !== page) {
-            navigate(route);
-        }
-    }
-
     return (
-        <MenuBar>
-            <Icon name='Início' page={page} onClic={() => goTo('Início')} />
-            <Icon name='Favoritos' page={page} onClic={() => goTo('Favoritos')} />
-            <Icon name='Histórico' page={page} onClic={() => goTo('Histórico')} />
-            <Icon name='Carrinho' page={page} onClic={() => goTo('Carrinho')} />
-        </MenuBar>
+        <>  
+            {(path !== '/' && path !== '/sign-up') && (    
+                <MenuBar>
+                    <Link to='/home'><Icon name='Início' page={page} /></Link>
+                    <Link to='/favorites'><Icon name='Favoritos' page={page} /></Link>
+                    <Link to='/history'></Link><Icon name='Histórico' page={page} />
+                    <Link to='/cart'></Link><Icon name='Carrinho' page={page} />                
+                </MenuBar>
+            )}
+        </>  
     );
 }
 
@@ -84,6 +64,10 @@ const MenuBar = styled.div`
     bottom: 0;
     z-index: 1;
     padding: 5px 15px;
+
+    a {
+        text-decoration: none;
+    }
 `;
 
 const IconStyle = styled.div`
