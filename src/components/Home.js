@@ -62,9 +62,10 @@ function PetOption({ pet }) {
 }
 
 function Item({ info }) {
+    
   return (
     <div>
-      <Link to={`/home/${info._id}`}>
+      <Link to={`/home/items/${info._id}`}>
         <img src={info.image} />
       </Link>
       <h5>{info.name}</h5>

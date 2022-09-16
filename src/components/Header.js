@@ -7,6 +7,7 @@ import currentPage from '../functions/currentPage';
 
 export default function Header() {
     const path = useLocation().pathname;
+    console.log(path)
     const navigate = useNavigate();
     const { user } = useContext(UserContext);
     const title = currentPage(path);
