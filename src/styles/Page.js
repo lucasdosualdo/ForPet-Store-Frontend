@@ -2,8 +2,7 @@ import styled from 'styled-components';
 
 const Page = styled.div`
 width: 100%;
-height: auto;
-min-height: 100vh;
+height: ${props => props.page === 'SignIn' || props.page === 'SignUp' ? '100vh' : 'auto'};
 margin: ${props => props.page === 'SignIn' || props.page === 'SignUp' ? '0' : '80px 0 60px 0'};
 padding: 0 25px;
 display: flex;

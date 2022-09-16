@@ -8,6 +8,7 @@ import SignIn from "./SignIn";
 import Home from "./Home";
 import Header from './Header';
 import Menu from './Menu';
+import Favorites from "./Favorites";
 
 export default function App() {
   return (
@@ -22,7 +23,7 @@ function Root() {
   const navigate = useNavigate();
 
   useEffect(() => {
-      const local = JSON.parse(localStorage.getItem('myWallet'));
+      const local = JSON.parse(localStorage.getItem('for-pets'));
       
       if(local) {
         const promise = getSession(local.token);
@@ -45,7 +46,7 @@ function Root() {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/home/" element={<Home />} />
           <Route path="/home/:for" element={<Home />} />
-          <Route path="/home/:for/:type" element={<Home />} />
+          <Route path="/favorites" element={<Favorites />} />
         </Routes>
       </>
     </UserContext.Provider>
