@@ -11,6 +11,7 @@ flex-direction: column;
 align-items: center;
 justify-content: ${props => props.page === 'SignIn' || props.page === 'SignUp' ? 'center' : 'start'};
 background-color: ${props => props.page === 'SignIn' || props.page === 'SignUp' ? '#15616d' : '#F8F5F0'};
+overflow: scroll;
 
 a {
     color: white;
