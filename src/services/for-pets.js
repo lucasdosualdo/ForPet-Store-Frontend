@@ -26,8 +26,24 @@ function deleteLogout(token) {
     });
 }
 
-function getItems(token) {
-    return axios.get(`${BASE_URL}/items`, {
+function getItems(token, filter) {
+    return axios.get(`${BASE_URL}/items${filter}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+}
+
+function postFavorite(token, body) {
+    return axios.post(`${BASE_URL}/favorites`, body,{
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+}
+
+function getFavorites(token) {
+    return axios.get(`${BASE_URL}/favorites`, {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -39,5 +55,7 @@ export {
     getSession,
     postSignUp,
     deleteLogout,
-    getItems
+    getItems,
+    postFavorite,
+    getFavorites
 };

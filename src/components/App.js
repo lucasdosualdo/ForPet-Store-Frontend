@@ -6,8 +6,9 @@ import { getSession } from "../services/for-pets";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import Home from "./Home";
-import Header from "./Header";
-import Menu from "./Menu";
+import Header from './Header';
+import Menu from './Menu';
+import Favorites from "./Favorites";
 import ItemPage from "./ItemPage";
 
 export default function App() {
@@ -24,10 +25,10 @@ function Root() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const local = JSON.parse(localStorage.getItem("myWallet"));
-    console.log(local);
-    if (local) {
-      const promise = getSession(local.token);
+      const local = JSON.parse(localStorage.getItem('for-pets'));
+      
+      if(local) {
+        const promise = getSession(local.token);
 
       promise.then((answer) => {
         setUser(local);
@@ -48,7 +49,7 @@ function Root() {
           <Route path="/home/" element={<Home />} />
           <Route path="/home/items/:itemId" element={<ItemPage />} />
           <Route path="/home/:for" element={<Home />} />
-          <Route path="/home/:for/:type" element={<Home />} />
+          <Route path="/favorites" element={<Favorites />} />
         </Routes>
       </>
     </UserContext.Provider>
