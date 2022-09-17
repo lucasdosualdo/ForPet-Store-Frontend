@@ -5,8 +5,11 @@ const Page = styled.div`
   height: auto;
   min-height: 100vh;
   margin: ${(props) =>
-    props.page === "SignIn" || props.page === "SignUp" ? "0" : "80px 0 60px 0"};
+    props.page === "SignIn" || props.page === "SignUp" || props.page === "items"
+      ? "0"
+      : "80px 0 60px 0"};
   padding: 0 25px;
+  padding: ${(props) => (props.page === "items" ? "80px 0 60px 0" : "0")};
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -1,77 +1,65 @@
 import { useParams } from "react-router-dom";
-import styled from "styled-components";
 import Page from "../styles/Page";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../contexts/UserContext";
+import {
+  PurchaseBox,
+  PriceBox,
+  ImageWrap,
+  TitleWrap,
+  AboutBox,
+  SelectedItem,
+} from "../styles/ItemPageStyle";
 
 export default function ItemPage() {
   const { items } = useContext(UserContext);
+  const [counter, setCounter] = useState(1);
   const { itemId } = useParams();
   const clickedItem = items.find((item) => item._id === itemId);
   console.log(clickedItem);
+
+  function decrementQuantify() {
+    if (counter === 1) return;
+    setCounter(counter - 1);
+  }
+
+  function incrementQuantify() {}
 
   return (
     <>
       <Page page="items">
         <SelectedItem>
-          <div>
+          <TitleWrap>
             <h5>{clickedItem.name}</h5>
+            <p>{clickedItem.brand}</p>
+          </TitleWrap>
+          <ImageWrap>
             <img src={clickedItem.image} />
+          </ImageWrap>
 
-            <span>
-              <h4>{`R$ ${clickedItem.price.replace(".", ",")}`}</h4>
-              <ion-icon name="heart"></ion-icon>
-            </span>
-          </div>
+          <PriceBox>
+            <h4>{`R$ ${clickedItem.price.replace(".", ",")}`}</h4>
+            {/* <ion-icon name="heart"></ion-icon> */}
+            <div>
+              <h6 onClick={decrementQuantify}>-</h6>
+              <h6>{counter}</h6>
+              <h4 onClick={() => setCounter(counter + 1)}>+</h4>
+            </div>
+          </PriceBox>
+          <PurchaseBox>
+            <div>
+              <h3>Adicionar ao carrinho</h3>
+            </div>
+            <div>
+              <h3>Comprar agora</h3>
+            </div>
+          </PurchaseBox>
+          <AboutBox>
+            <h5>Sobre</h5>
+            <p>{clickedItem.about}</p>
+          </AboutBox>
         </SelectedItem>
       </Page>
     </>
   );
 }
-
-const SelectedItem = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: fixed;
-  div {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    background-color: white;
-    border-radius: 10px;
-    border: 1px solid #ffeed1;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
-  }
-  img {
-    width: 80%;
-  }
-  span {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  ion-icon {
-    color: #cacaca;
-  }
-
-  h5 {
-    color: #a6a6a6;
-    font-size: 14px;
-    line-height: 18px;
-    text-align: left;
-    width: 100%;
-    word-wrap: break-word;
-  }
-
-  h4 {
-    color: #a6a6a6;
-    font-size: 18px;
-    font-weight: 700;
-  }
-`;
