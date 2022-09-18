@@ -40,8 +40,7 @@ export default function SignIn() {
         JSON.stringify({
           name: answer.data.name,
           token: answer.data.token,
-        })
-      );
+        }));
 
       navigate("/home");
     });

@@ -71,7 +71,7 @@ function List({ items, loadItems }) {
     
     return (
         <>
-            {items.lenght === 0 ? (
+            {items.length === 0 ? (
                 <p>Não foi possível encontrar nenhum item disponível para a categoria selecionada.</p>
             ) : (
                 items.map((item, index) => (

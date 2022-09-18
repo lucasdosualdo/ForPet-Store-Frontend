@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useLocation, Link } from 'react-router-dom';
-import currentPage from '../functions/currentPage';
+import { currentPage } from '../functions/globalFunctions';
 
 export default function Menu() {
     const path = useLocation().pathname;
@@ -16,8 +16,8 @@ export default function Menu() {
                 <MenuBar>
                     <Link to='/home'><Icon name='Início' page={page} /></Link>
                     <Link to='/favorites'><Icon name='Favoritos' page={page} /></Link>
-                    <Link to='/history'></Link><Icon name='Histórico' page={page} />
-                    <Link to='/cart'></Link><Icon name='Carrinho' page={page} />                
+                    <Link to='/history'><Icon name='Histórico' page={page} /></Link>
+                    <Link to='/cart'><Icon name='Carrinho' page={page} /></Link>                
                 </MenuBar>
             )}
         </>  

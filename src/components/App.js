@@ -9,6 +9,9 @@ import Home from "./Home";
 import Header from './Header';
 import Menu from './Menu';
 import Favorites from "./Favorites";
+import Cathegories from "./Cathegories";
+import History from "./History";
+import OrderDetails from "./OrderDetails";
 
 export default function App() {
   return (
@@ -45,8 +48,10 @@ function Root() {
           <Route path="/" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/home/" element={<Home />} />
-          <Route path="/home/:for" element={<Home />} />
+          <Route path="/cathegories/:for" element={<Cathegories />} />
           <Route path="/favorites" element={<Favorites />} />
+          <Route path="/history" element={<History />} />
+          <Route path="/order/:orderId" element={<OrderDetails />} />
         </Routes>
       </>
     </UserContext.Provider>

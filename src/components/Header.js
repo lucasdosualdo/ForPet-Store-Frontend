@@ -3,22 +3,25 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import UserContext from '../contexts/UserContext';
 import { useContext } from 'react';
 import { deleteLogout } from '../services/for-pets';
-import currentPage from '../functions/currentPage';
+import { currentPage } from '../functions/globalFunctions';
 
 export default function Header() {
     const path = useLocation().pathname;
+    const search = useLocation().search;
     const navigate = useNavigate();
     const { user } = useContext(UserContext);
     const title = currentPage(path);
 
     function logout() {
-        if(window.confirm('Tem certeza que deseja sair?')) {
+        /* if(window.confirm('Tem certeza que deseja sair?')) {
             deleteLogout(user.token).then(() => navigate('/'));
-        } else return;
+            localStorage.clear();
+        } else return; */
+        navigate('/order/243io?from=history');
     }
 
     function goBack() {
-        if(path === '/home') {
+        if(path === '/home' && search === '') {
             return;
         }
 
@@ -28,7 +31,7 @@ export default function Header() {
     return (
         <>
             {(path !== '/' && path !== '/sign-up') && (
-                <HeaderBar page={path}>
+                <HeaderBar page={`${path}${search}`}>
                     <ion-icon name="chevron-back-outline" onClick={goBack}></ion-icon>
                     <h1>{title}</h1>
                     <ion-icon name="log-out-outline" onClick={logout}></ion-icon>
@@ -52,7 +55,7 @@ const HeaderBar = styled.div`
     position: fixed;
     left: 0;
     top: 0;
-    padding: 0 25px;
+    padding: 0 15px;
     z-index: 2;
     
     h1 {
