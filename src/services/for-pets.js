@@ -58,6 +58,30 @@ function postPurchase(token, body) {
   });
 }
 
+function getCathegories(token, pet) {
+  return axios.get(`${BASE_URL}/cathegories/${pet}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+function getHistory(token) {
+  return axios.get(`${BASE_URL}/history`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+function getOrder(token, id) {
+  return axios.get(`${BASE_URL}/order/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
 export {
   postSignIn,
   getSession,
@@ -66,5 +90,8 @@ export {
   getItems,
   postFavorite,
   getFavorites,
+  getCathegories,
+  getHistory,
+  getOrder,
   postPurchase,
 };

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Page from "../styles/Page";
 import { useContext, useState } from "react";
 import UserContext from "../contexts/UserContext";
@@ -14,12 +14,13 @@ import {
 import { postPurchase } from "../services/for-pets";
 
 export default function ItemPage() {
-  const { items } = useContext(UserContext);
+  const navigate = useNavigate();
+  const { itemsContext } = useContext(UserContext);
   const { user } = useContext(UserContext);
   const [counter, setCounter] = useState(1);
   const { itemId } = useParams();
-  const clickedItem = items.find((item) => item._id === itemId);
-
+  const clickedItem = itemsContext.find((item) => item._id === itemId);
+  console.log(itemId);
   function decrementQuantify() {
     if (counter === 1) return;
     setCounter(counter - 1);
@@ -30,9 +31,9 @@ export default function ItemPage() {
       alert("Sessão expirada. Faça o login novamente");
       return;
     }
-    const multipliedPrice = counter * Number(clickedItem.price);
+    const multipliedPrice = (counter * Number(clickedItem.price)).toFixed(2);
     const body = {
-      userId: user.userId,
+      userId: user.userId, //nao achado
       date: dayjs().format("DD/MM/YYYY"),
       items: [
         {
@@ -41,11 +42,12 @@ export default function ItemPage() {
           value: multipliedPrice,
         },
       ],
-      totalValue: counter * Number(clickedItem.price),
+      totalValue: multipliedPrice,
     };
     const promise = postPurchase(user.token, body);
     promise.then((answer) => {
-      const orderId = answer.data;
+      console.log(answer.data.insertedId);
+      // navigate(`/order/${answer.data.insertedId}`);
     });
     promise.catch((answer) => {
       alert(answer.response.data);

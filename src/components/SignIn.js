@@ -33,6 +33,7 @@ export default function SignIn() {
       setUser({
         name: answer.data.name,
         token: answer.data.token,
+        userId: answer.data._id,
       });
 
       localStorage.setItem(
@@ -49,6 +50,7 @@ export default function SignIn() {
 
     promise.catch((answer) => {
       alert(answer.response.data);
+      navigate("/");
     });
   }
 

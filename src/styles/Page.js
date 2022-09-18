@@ -2,12 +2,13 @@ import styled from "styled-components";
 
 const Page = styled.div`
   width: 100%;
-  height: auto;
-  min-height: 100vh;
+  height: ${(props) =>
+    props.page === "SignIn" || props.page === "SignUp" ? "100vh" : "auto"};
   margin: ${(props) =>
     props.page === "SignIn" || props.page === "SignUp" || props.page === "items"
       ? "0"
       : "80px 0 60px 0"};
+  //padding: 0 15px;
   padding: 0 25px;
   padding: ${(props) => (props.page === "items" ? "80px 0 60px 0" : "0")};
   display: flex;
@@ -25,6 +26,14 @@ const Page = styled.div`
     font-weight: 700;
     font-size: 15px;
     text-decoration: none;
+  }
+
+  h2 {
+    color: #15616d;
+    font-size: 32px;
+    font-weight: 700;
+    margin: 20px 0;
+    text-align: center;
   }
 `;
 

@@ -49,9 +49,8 @@ function Item({ info, loadItems, favorites, loadFavorites }) {
   );
 }
 
-function List({ loadItems }) {
+function List({ items, loadItems }) {
   const { user } = useContext(UserContext);
-  const { items } = useContext(UserContext);
   const [favorites, setFavorites] = useState([]);
 
   function loadFavorites() {
@@ -64,7 +63,6 @@ function List({ loadItems }) {
 
     promise.catch((answer) => {
       alert(answer.response.data);
-      console.log(answer.data);
     });
   }
 
@@ -74,7 +72,7 @@ function List({ loadItems }) {
 
   return (
     <>
-      {items.lenght === 0 ? (
+      {items.length === 0 ? (
         <p>
           Não foi possível encontrar nenhum item disponível para a categoria
           selecionada.

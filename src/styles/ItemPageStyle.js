@@ -56,7 +56,9 @@ const PriceBox = styled.span`
 
 const ImageWrap = styled.div`
   height: auto;
+  width: 100%;
   margin-bottom: 3px;
+  padding: 20px 0;
   background-color: white;
   display: flex;
   justify-content: center;

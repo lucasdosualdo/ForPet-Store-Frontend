@@ -1,4 +1,4 @@
-export default function CurrentPage(path) {
+function currentPage(path) {
   let page = "";
 
   if (path.includes("home")) {
@@ -25,5 +25,21 @@ export default function CurrentPage(path) {
     page = "Favoritos";
   }
 
+  if (path.includes("cathegories")) {
+    page = "Categorias";
+  }
+
   return page;
 }
+
+function numberOfItems(list) {
+  let n = 0;
+
+  list.forEach((item) => {
+    n += item.quantify;
+  });
+
+  return n;
+}
+
+export { currentPage, numberOfItems };
