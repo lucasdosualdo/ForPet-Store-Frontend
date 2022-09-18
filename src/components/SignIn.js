@@ -35,7 +35,7 @@ export default function SignIn() {
                 token: answer.data.token
             });
 
-            localStorage.setItem('myWallet', JSON.stringify({
+            localStorage.setItem('for-pets', JSON.stringify({
                 name: answer.data.name,
                 token: answer.data.token
             }));

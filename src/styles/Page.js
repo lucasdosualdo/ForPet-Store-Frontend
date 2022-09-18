@@ -4,7 +4,7 @@ const Page = styled.div`
 width: 100%;
 height: ${props => props.page === 'SignIn' || props.page === 'SignUp' ? '100vh' : 'auto'};
 margin: ${props => props.page === 'SignIn' || props.page === 'SignUp' ? '0' : '80px 0 60px 0'};
-padding: 0 25px;
+padding: 0 15px;
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -17,6 +17,14 @@ a {
     font-weight: 700;
     font-size: 15px;
     text-decoration: none;
+}
+
+h2 {
+    color: #15616D;
+    font-size: 32px;
+    font-weight: 700;
+    margin: 20px 0;
+    text-align: center;
 }
 `;
 

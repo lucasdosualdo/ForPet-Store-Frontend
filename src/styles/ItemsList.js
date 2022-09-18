@@ -47,6 +47,13 @@ const ItemsList = styled.div`
         font-size: 18px;
         font-weight: 700;
     }
+
+    p {
+        font-size: 20px;
+        line-height: 28px;
+        color: #A6A6A6;
+        margin-bottom: 100vh;
+    }
 `;
 
 export default ItemsList;

@@ -2,7 +2,7 @@ import Page from '../styles/Page'
 import ItemsList from '../styles/ItemsList';
 import UserContext from "../contexts/UserContext";
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { List } from './Items';
 import { getItems } from '../services/for-pets';
@@ -17,9 +17,10 @@ export default function Home () {
     const { user } = useContext(UserContext);
     const navigate = useNavigate();
     const [items, setItems] = useState([]);
+    const filter = useLocation().search;
 
     function loadItems() {
-        const promise = getItems(user.token, "");
+        const promise = getItems(user.token, filter);
         promise.then(answer => {
             setItems(answer.data);
         });
@@ -35,14 +36,14 @@ export default function Home () {
     }, []);
 
     return (
-        <Page page='home'>
+        <Page page={`home${filter}`}>
             <OptionBar>
-                <PetOption pet={{name: 'Cachorros', img: Cachorros}}/>
-                <PetOption pet={{name: 'Gatos', img: Gatos}}/>
-                <PetOption pet={{name: 'Pássaros', img: Pássaros}}/>
-                <PetOption pet={{name: 'Peixes', img: Peixes}}/>
-                <PetOption pet={{name: 'Répteis', img: Répteis}}/>
-                <PetOption pet={{name: 'Roedores', img: Roedores}}/>
+                <Link to='/cathegories/dogs'><PetOption pet={{name: 'Cachorros', img: Cachorros}}/></Link>
+                <Link to='/cathegories/cats'><PetOption pet={{name: 'Gatos', img: Gatos}}/></Link>
+                <Link to='/cathegories/birds'><PetOption pet={{name: 'Pássaros', img: Pássaros}}/></Link>
+                <Link to='/cathegories/fish'><PetOption pet={{name: 'Peixes', img: Peixes}}/></Link>
+                <Link to='/cathegories/reptiles'><PetOption pet={{name: 'Répteis', img: Répteis}}/></Link>
+                <Link to='/cathegories/rodents'><PetOption pet={{name: 'Roedores', img: Roedores}}/></Link>
             </OptionBar>
 
             <ItemsList page='home'>
@@ -55,7 +56,7 @@ export default function Home () {
 function PetOption({ pet }) {
     return (
         <div>
-            <span><img src={pet.img} alt={pet} /></span>
+            <span><img src={pet.img} alt={pet.name} /></span>
             <h6>{pet.name}</h6>
         </div>
     );
