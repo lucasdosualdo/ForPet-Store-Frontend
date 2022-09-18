@@ -40,6 +40,7 @@ export default function SignIn() {
         JSON.stringify({
           name: answer.data.name,
           token: answer.data.token,
+          userId: answer.data._id,
         })
       );
 

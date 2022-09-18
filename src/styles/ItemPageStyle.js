@@ -60,6 +60,12 @@ const ImageWrap = styled.div`
   background-color: white;
   display: flex;
   justify-content: center;
+  position: relative;
+  ion-icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
 `;
 
 const TitleWrap = styled.div`
