@@ -26,7 +26,7 @@ export default function ItemPage() {
   }, []);
 
   const multipliedPrice = (counter * Number(clickedItem.price)).toFixed(2);
- console.log(multipliedPrice, "valor multiplicado")
+
   function decrementQuantify() {
     if (counter === 1) return;
     setCounter(counter - 1);
@@ -39,7 +39,7 @@ export default function ItemPage() {
     }
 
     const body = {
-      userId: user.userId, //nao achado
+      userId: user.userId,
       date: dayjs().format("DD/MM/YYYY"),
       email: user.email,
       items: [
@@ -53,7 +53,8 @@ export default function ItemPage() {
     };
     const promise = postPurchase(user.token, body);
     promise.then((answer) => {
-      // navigate(`/order/${answer.data.insertedId}`);
+      alert("Pedido realizado com sucesso!");
+      navigate("`/order/${answer.data.insertedId}`");
     });
     promise.catch((error) => {
       alert(error.response.data);
@@ -76,9 +77,7 @@ export default function ItemPage() {
       name: clickedItem.name,
     };
     const promise = postCart(user.token, body);
-    promise.then((answer) => {
-      console.log(answer)
-    });
+    promise.then((answer) => {});
     promise.catch((error) => {
       alert(error.response.data);
     });

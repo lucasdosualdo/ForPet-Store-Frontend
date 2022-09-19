@@ -1,10 +1,11 @@
 import Page from "../styles/Page";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../contexts/UserContext";
-import { getCart } from "../services/for-pets";
+import { getCart, postPurchase, toDelete } from "../services/for-pets";
 import { useNavigate } from "react-router-dom";
 import CartList from "./CartList";
 import styled from "styled-components";
+import dayjs from "dayjs";
 
 export default function Cart() {
   //const { itemContext } = useContext(UserContext);
@@ -40,6 +41,37 @@ export default function Cart() {
     showtCartItems();
   }, []);
 
+  function purchaseItem() {
+    if (!user.token) {
+      alert("Sessão expirada. Faça o login novamente");
+      return;
+    }
+    const purchaseItemsArray = cartItemsArray.map((item) => ({
+      itemId: item.itemId,
+      quantify: item.quantify,
+      totalValue: item.totalValue,
+    }));
+
+    const body = {
+      userId: user.userId, //nao achado
+      date: dayjs().format("DD/MM/YYYY"),
+      email: user.email,
+      items: purchaseItemsArray,
+      totalValue: totalCounter,
+    };
+    const promise = postPurchase(user.token, body);
+    promise.then((answer) => {
+      console.log(answer.data);
+      toDelete(user.token, "checkout");
+      navigate("/home");
+      console.log(answer.data.insertedId);
+      navigate(`/order/${answer.data.insertedId}`);
+    });
+    promise.catch((error) => {
+      alert(error.response.data);
+    });
+  }
+
   return (
     <Page page="cart">
       <EmptyMessage>
@@ -58,7 +90,7 @@ export default function Cart() {
         </div>
 
         <div>
-          <h5>Fechar pedido</h5>
+          <h5 onClick={purchaseItem}>Fechar pedido</h5>
         </div>
       </OrderBox>
     </Page>

@@ -120,5 +120,5 @@ export {
   postPurchase,
   postCart,
   getCart,
-  toDelete
+  toDelete,
 };
