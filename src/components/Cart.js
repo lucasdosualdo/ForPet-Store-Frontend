@@ -1,10 +1,31 @@
 import styled from "styled-components";
 import Page from "../styles/Page";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import UserContext from "../contexts/UserContext";
+import { getCart } from "../services/for-pets";
 
 export default function Cart() {
   const { itemContext } = useContext(UserContext);
+  const { user } = useContext(UserContext);
+
+  function showtCartItems() {
+    if (!user.token) {
+      alert("Sessão expirada. Faça o login novamente");
+      return;
+    }
+    const promise = getCart(user.token);
+    promise.then((answer) => {
+      console.log(answer, answer.data);
+    });
+    promise.catch((error) => {
+      console.log(error);
+      alert("deu ruim");
+    });
+  }
+
+  useEffect(() => {
+    showtCartItems();
+  }, []);
   return (
     <Page page="cart">
       <CartItem>

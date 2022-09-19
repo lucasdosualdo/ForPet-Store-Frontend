@@ -33,7 +33,8 @@ export default function SignIn() {
       setUser({
         name: answer.data.name,
         token: answer.data.token,
-        userId: answer.data._id,
+        userId: answer.data.userId,
+        email: answer.data.email,
       });
 
       localStorage.setItem(
@@ -41,7 +42,8 @@ export default function SignIn() {
         JSON.stringify({
           name: answer.data.name,
           token: answer.data.token,
-          userId: answer.data._id,
+          userId: answer.data.userId,
+          email: answer.data.email,
         })
       );
 

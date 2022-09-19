@@ -58,6 +58,22 @@ function postPurchase(token, body) {
   });
 }
 
+function postCart(token, body) {
+  return axios.post(`${BASE_URL}/cart`, body, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+function getCart(token) {
+  return axios.get(`${BASE_URL}/cart`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
 function getCathegories(token, pet) {
   return axios.get(`${BASE_URL}/cathegories/${pet}`, {
     headers: {
@@ -94,4 +110,6 @@ export {
   getHistory,
   getOrder,
   postPurchase,
+  postCart,
+  getCart,
 };

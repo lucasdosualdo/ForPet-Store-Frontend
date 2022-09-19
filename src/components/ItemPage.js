@@ -11,7 +11,7 @@ import {
   AboutBox,
   SelectedItem,
 } from "../styles/ItemPageStyle";
-import { postPurchase } from "../services/for-pets";
+import { postPurchase, postCart } from "../services/for-pets";
 
 export default function ItemPage() {
   const navigate = useNavigate();
@@ -25,6 +25,8 @@ export default function ItemPage() {
     setItemContext(itemsContext.find((item) => item._id === itemId));
   }, []);
 
+  const multipliedPrice = (counter * Number(clickedItem.price)).toFixed(2);
+
   function decrementQuantify() {
     if (counter === 1) return;
     setCounter(counter - 1);
@@ -35,15 +37,17 @@ export default function ItemPage() {
       alert("Sessão expirada. Faça o login novamente");
       return;
     }
-    const multipliedPrice = (counter * Number(clickedItem.price)).toFixed(2);
+
     const body = {
       userId: user.userId, //nao achado
       date: dayjs().format("DD/MM/YYYY"),
+      email: user.email,
       items: [
         {
           itemId,
           quantify: counter,
           value: multipliedPrice,
+
         },
       ],
       totalValue: multipliedPrice,
@@ -53,8 +57,32 @@ export default function ItemPage() {
       console.log(answer.data.insertedId);
       // navigate(`/order/${answer.data.insertedId}`);
     });
-    promise.catch((answer) => {
-      alert(answer.response.data);
+    promise.catch((error) => {
+      alert(error.response.data);
+    });
+  }
+
+  function addToCart() {
+    if (!user.token) {
+      alert("Sessão expirada. Faça o login novamente");
+      return;
+    }
+    const body = {
+      userId: user.userId,
+      email: user.email,
+      itemId,
+      quantify: counter,
+      price: clickedItem.price,
+      totalValue: multipliedPrice,
+      image: clickedItem.image,
+      name: clickedItem.name,
+    };
+    const promise = postCart(user.token, body);
+    promise.then((answer) => {
+      console.log(answer, answer.data);
+    });
+    promise.catch((error) => {
+      alert(error.response.data);
     });
   }
 
@@ -79,13 +107,16 @@ export default function ItemPage() {
             </div>
           </PriceBox>
           <PurchaseBox>
-            <Link to="/cart">
-              <div>
-                <h3>Adicionar ao carrinho</h3>
-              </div>
-            </Link>
-            <div onClick={purchaseItem}>
-              <h3>Comprar agora</h3>
+            <div>
+              <Link to="/cart">
+                <h3 onClick={addToCart}>Adicionar ao carrinho</h3>
+              </Link>
+            </div>
+
+            <div>
+              <Link to="/home">
+                <h3 onClick={purchaseItem}>Comprar agora</h3>
+              </Link>
             </div>
           </PurchaseBox>
           <AboutBox>
