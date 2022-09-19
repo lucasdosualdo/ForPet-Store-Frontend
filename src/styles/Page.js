@@ -3,15 +3,16 @@ import styled from "styled-components";
 const Page = styled.div`
   width: 100%;
   height: ${(props) =>
-    props.page === "SignIn" || props.page === "SignUp" ? "100vh" : "auto"};
+    props.page === "SignIn" || props.page === "SignUp" || props.page === "cart"
+      ? "100vh"
+      : "auto"};
   margin: ${(props) =>
-    props.page === "SignIn" || props.page === "SignUp" || props.page === "items"
+    props.page === "SignIn" || props.page === "SignUp" || props.page === "cart"
       ? "0"
       : "80px 0 60px 0"};
   //padding: 0 15px;
-  padding: 0 25px;
-  padding: ${(props) =>
-    props.page === "items" || props.page === "carat" ? "80px 0 60px 0" : "0"};
+
+  padding: ${(props) => (props.page === "cart" ? "80px 0 150px 0" : "0 25px")};
   display: flex;
   flex-direction: column;
   align-items: center;

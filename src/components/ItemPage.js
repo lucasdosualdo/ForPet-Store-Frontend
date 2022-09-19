@@ -26,7 +26,7 @@ export default function ItemPage() {
   }, []);
 
   const multipliedPrice = (counter * Number(clickedItem.price)).toFixed(2);
- 
+ console.log(multipliedPrice, "valor multiplicado")
   function decrementQuantify() {
     if (counter === 1) return;
     setCounter(counter - 1);
@@ -77,6 +77,7 @@ export default function ItemPage() {
     };
     const promise = postCart(user.token, body);
     promise.then((answer) => {
+      console.log(answer)
     });
     promise.catch((error) => {
       alert(error.response.data);
