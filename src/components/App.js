@@ -13,6 +13,7 @@ import ItemPage from "./ItemPage";
 import Cathegories from "./Cathegories";
 import History from "./History";
 import OrderDetails from "./OrderDetails";
+import Cart from "./Cart";
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
 function Root() {
   const [user, setUser] = useState({});
   const [itemsContext, setItemsContext] = useState([]);
+  const [itemContext, setItemContext] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,7 +51,14 @@ function Root() {
 
   return (
     <UserContext.Provider
-      value={{ user, setUser, itemsContext, setItemsContext }}
+      value={{
+        user,
+        setUser,
+        itemsContext,
+        setItemsContext,
+        itemContext,
+        setItemContext,
+      }}
     >
       <>
         <GlobalStyle />
@@ -65,6 +74,7 @@ function Root() {
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/history" element={<History />} />
           <Route path="/order/:orderId" element={<OrderDetails />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </>
     </UserContext.Provider>

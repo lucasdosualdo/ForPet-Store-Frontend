@@ -1,6 +1,6 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import Page from "../styles/Page";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import UserContext from "../contexts/UserContext";
 import dayjs from "dayjs";
 import {
@@ -16,11 +16,15 @@ import { postPurchase } from "../services/for-pets";
 export default function ItemPage() {
   const navigate = useNavigate();
   const { itemsContext } = useContext(UserContext);
+  const { setItemContext } = useContext(UserContext);
   const { user } = useContext(UserContext);
   const [counter, setCounter] = useState(1);
   const { itemId } = useParams();
   const clickedItem = itemsContext.find((item) => item._id === itemId);
-  console.log(itemId);
+  useEffect(() => {
+    setItemContext(itemsContext.find((item) => item._id === itemId));
+  }, []);
+
   function decrementQuantify() {
     if (counter === 1) return;
     setCounter(counter - 1);
@@ -75,9 +79,11 @@ export default function ItemPage() {
             </div>
           </PriceBox>
           <PurchaseBox>
-            <div>
-              <h3>Adicionar ao carrinho</h3>
-            </div>
+            <Link to="/cart">
+              <div>
+                <h3>Adicionar ao carrinho</h3>
+              </div>
+            </Link>
             <div onClick={purchaseItem}>
               <h3>Comprar agora</h3>
             </div>

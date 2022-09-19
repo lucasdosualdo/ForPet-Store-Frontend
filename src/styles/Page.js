@@ -10,7 +10,8 @@ const Page = styled.div`
       : "80px 0 60px 0"};
   //padding: 0 15px;
   padding: 0 25px;
-  padding: ${(props) => (props.page === "items" ? "80px 0 60px 0" : "0")};
+  padding: ${(props) =>
+    props.page === "items" || props.page === "carat" ? "80px 0 60px 0" : "0"};
   display: flex;
   flex-direction: column;
   align-items: center;
