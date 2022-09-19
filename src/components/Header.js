@@ -13,11 +13,11 @@ export default function Header() {
     const title = currentPage(path);
 
     function logout() {
-        /* if(window.confirm('Tem certeza que deseja sair?')) {
-            deleteLogout(user.token).then(() => navigate('/'));
-            localStorage.clear();
-        } else return; */
-        navigate('/order/243io?from=history');
+          if(window.confirm('Tem certeza que deseja sair?')) {
+             deleteLogout(user.token).then(() => navigate('/'));
+             localStorage.clear();
+         } else return; 
+         navigate('/order/243io?from=history');
     }
 
     function goBack() {

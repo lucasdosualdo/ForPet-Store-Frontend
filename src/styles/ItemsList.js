@@ -29,7 +29,7 @@ const ItemsList = styled.div`
     }
 
     img {
-        width: inherit;
+        width: 80%;
         margin-bottom: 15px;
     }
 

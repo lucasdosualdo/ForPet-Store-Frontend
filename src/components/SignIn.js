@@ -5,7 +5,7 @@ import Logo from "../styles/Logo";
 import UserContext from "../contexts/UserContext";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { postSignIn } from "../services/my-pets";
+import { postSignIn } from "../services/for-pets";
 
 export default function SignIn() {
   const { setUser } = useContext(UserContext);
@@ -33,6 +33,8 @@ export default function SignIn() {
       setUser({
         name: answer.data.name,
         token: answer.data.token,
+        userId: answer.data.userId,
+        email: answer.data.email,
       });
 
       localStorage.setItem(
@@ -40,13 +42,17 @@ export default function SignIn() {
         JSON.stringify({
           name: answer.data.name,
           token: answer.data.token,
-        }));
+          userId: answer.data.userId,
+          email: answer.data.email,
+        })
+      );
 
       navigate("/home");
     });
 
     promise.catch((answer) => {
       alert(answer.response.data);
+      navigate("/");
     });
   }
 

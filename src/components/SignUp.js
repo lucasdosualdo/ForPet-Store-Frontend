@@ -2,7 +2,7 @@ import Form from "../styles/Form";
 import Page from "../styles/Page";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { postSignUp } from "../services/my-pets";
+import { postSignUp } from "../services/for-pets";
 import logo from "../assets/logo.png";
 import Logo from "../styles/Logo";
 
