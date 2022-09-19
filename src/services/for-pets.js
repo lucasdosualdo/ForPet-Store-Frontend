@@ -74,6 +74,21 @@ function getCart(token) {
   });
 }
 
+function deleteItem(token, id) {
+  return axios.delete(`${BASE_URL}/cart/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+function decrementItem(token, body) {
+  return axios.put(`${BASE_URL}/cartitem`, body, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
 function getCathegories(token, pet) {
   return axios.get(`${BASE_URL}/cathegories/${pet}`, {
     headers: {
@@ -112,4 +127,6 @@ export {
   postPurchase,
   postCart,
   getCart,
+  deleteItem,
+  decrementItem,
 };
