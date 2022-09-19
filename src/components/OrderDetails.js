@@ -69,7 +69,6 @@ function List({ items }) {
 }
 
 function Item({ id, quantify, value }) {
-  const { user } = useContext(UserContext);
   const [item, setItem] = useState({});
   const { itemsContext } = useContext(UserContext);
   useEffect(() => {
