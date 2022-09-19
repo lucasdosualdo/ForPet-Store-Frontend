@@ -31,7 +31,6 @@ function Root() {
 
   useEffect(() => {
     const local = JSON.parse(localStorage.getItem("for-pets"));
-    console.log(local, "localStorage");
 
     if (local) {
       const promise = getSession(local.token);

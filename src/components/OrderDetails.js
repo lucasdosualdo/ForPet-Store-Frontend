@@ -1,9 +1,6 @@
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import UserContext from "../contexts/UserContext";
-
-//tem que importar o context dos items <<<<<<<------------------
-
 import { getOrder } from "../services/for-pets";
 import styled from "styled-components";
 import { numberOfItems } from "../functions/globalFunctions";
@@ -13,7 +10,7 @@ export default function OrderDetails() {
   const orderId = useParams();
   const checkout = useLocation().search;
   const navigate = useNavigate();
-  const [order, setOrder] = useState({});
+  const [order, setOrder] = useState({ items: [] });
   const { user } = useContext(UserContext);
 
   useEffect(() => {
@@ -21,7 +18,7 @@ export default function OrderDetails() {
 
     promise.then((answer) => {
       setOrder(answer.data);
-      console.log(answer.data, "aquiiiiii");
+      console.log(answer.data);
     });
 
     promise.catch((answer) => {
@@ -29,8 +26,12 @@ export default function OrderDetails() {
       navigate("/home");
     });
   }, []);
-
-  const numItems = numberOfItems(order.items);
+  let numItems;
+  if (order.items) {
+    numItems = numberOfItems(order.items);
+  } else {
+    console.log("deu ruim");
+  }
 
   return (
     <Page page="order">
@@ -70,8 +71,7 @@ function List({ items }) {
 function Item({ id, quantify, value }) {
   const { user } = useContext(UserContext);
   const [item, setItem] = useState({});
-  const { itemsContext } = useContext(UserContext); //tem que vir do useContext de itens <<<<<<<<<<<<<<<<--------------------------
-
+  const { itemsContext } = useContext(UserContext);
   useEffect(() => {
     setItem(itemsContext.find((e) => e._id === id));
   }, []);
