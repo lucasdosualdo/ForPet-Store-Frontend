@@ -1,12 +1,15 @@
-import styled from "styled-components";
 import Page from "../styles/Page";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import UserContext from "../contexts/UserContext";
 import { getCart } from "../services/for-pets";
+import { useNavigate } from "react-router-dom";
+import CartList from "./CartList";
 
 export default function Cart() {
-  const { itemContext } = useContext(UserContext);
+  //const { itemContext } = useContext(UserContext);
   const { user } = useContext(UserContext);
+  const [cartItemsArray, setCartItemsArray] = useState([]);
+  const navigate = useNavigate();
 
   function showtCartItems() {
     if (!user.token) {
@@ -15,104 +18,50 @@ export default function Cart() {
     }
     const promise = getCart(user.token);
     promise.then((answer) => {
-      console.log(answer, answer.data);
+      setCartItemsArray(answer.data);
     });
     promise.catch((error) => {
-      console.log(error);
-      alert("deu ruim");
+      alert("Algo deu errado.");
+      navigate("/home");
     });
   }
 
   useEffect(() => {
     showtCartItems();
   }, []);
+
   return (
+    // <Page page="cart">
+    //   <CartItem>
+    //     <img src={itemContext.image} />
+    //     <InfoContainer>
+    //       <h5>{itemContext.name}</h5>
+    //       <PriceBox>
+    //         <h4>{`R$ ${itemContext.price.replace(".", ",")}`}</h4>
+    //         <QuantItems>
+    //           <span>
+    //             <h5>-</h5>
+    //           </span>
+    //           <span>
+    //             <h5>2</h5>
+    //           </span>
+    //           <span>
+    //             <h4>+</h4>
+    //           </span>
+    //         </QuantItems>
+    //       </PriceBox>
+    //     </InfoContainer>
+    //   </CartItem>
+    // </Page>
+
     <Page page="cart">
-      <CartItem>
-        <img src={itemContext.image} />
-        <InfoContainer>
-          <h5>{itemContext.name}</h5>
-          <PriceBox>
-            <h4>{`R$ ${itemContext.price.replace(".", ",")}`}</h4>
-            <QuantItems>
-              <span>
-                <h5>-</h5>
-              </span>
-              <span>
-                <h5>2</h5>
-              </span>
-              <span>
-                <h4>+</h4>
-              </span>
-            </QuantItems>
-          </PriceBox>
-        </InfoContainer>
-      </CartItem>
+      {cartItemsArray.length === 0 ? (
+        <p>Seu carrinho está vazio.</p>
+      ) : (
+        cartItemsArray.map((item, index) => (
+          <CartList item={item} key={index} index={index} />
+        ))
+      )}
     </Page>
   );
 }
-
-const InfoContainer = styled.div`
-  margin-left: 5px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  h5 {
-    color: #a6a6a6;
-    font-size: 18px;
-    line-height: 20px;
-    text-align: left;
-    width: 100%;
-    word-wrap: break-word;
-  }
-
-  h4 {
-    color: #e8713c;
-    font-size: 24px;
-    font-weight: 700;
-  }
-`;
-
-const CartItem = styled.div`
-  width: 100%;
-  background-color: white;
-  height: auto;
-  display: flex;
-
-  max-height: 220px;
-  padding: 15px 15px 20px 15px;
-  margin-bottom: 3px;
-  img {
-    height: 60%;
-    width: auto;
-  }
-`;
-
-const PriceBox = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-`;
-
-const QuantItems = styled.div`
-  border: 2px solid #cacaca;
-  width: 90px;
-  height: 30px;
-  display: flex;
-  justify-content: space-between;
-  border-radius: 6px;
-  align-items: center;
-  text-align: center;
-  bottom: 15px;
-  right: 20px;
-  padding: 0 5px;
-  h4 {
-    color: #15616d;
-    font-weight: 500;
-  }
-  p {
-    color: #a6a6a6;
-    font-size: 20px;
-  }
-`;

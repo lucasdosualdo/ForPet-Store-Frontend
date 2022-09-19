@@ -26,7 +26,7 @@ export default function ItemPage() {
   }, []);
 
   const multipliedPrice = (counter * Number(clickedItem.price)).toFixed(2);
-
+ 
   function decrementQuantify() {
     if (counter === 1) return;
     setCounter(counter - 1);
@@ -47,14 +47,12 @@ export default function ItemPage() {
           itemId,
           quantify: counter,
           value: multipliedPrice,
-
         },
       ],
       totalValue: multipliedPrice,
     };
     const promise = postPurchase(user.token, body);
     promise.then((answer) => {
-      console.log(answer.data.insertedId);
       // navigate(`/order/${answer.data.insertedId}`);
     });
     promise.catch((error) => {
@@ -79,7 +77,6 @@ export default function ItemPage() {
     };
     const promise = postCart(user.token, body);
     promise.then((answer) => {
-      console.log(answer, answer.data);
     });
     promise.catch((error) => {
       alert(error.response.data);
@@ -99,7 +96,7 @@ export default function ItemPage() {
             <img src={clickedItem.image} />
           </ImageWrap>
           <PriceBox>
-            <h4>{`R$ ${clickedItem.price.replace(".", ",")}`}</h4>
+            <h4>{`R$ ${multipliedPrice.replace(".", ",")}`}</h4>
             <div>
               <h6 onClick={decrementQuantify}>-</h6>
               <h6>{counter}</h6>
