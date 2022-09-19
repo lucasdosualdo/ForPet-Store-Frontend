@@ -21,12 +21,14 @@ export default function Cart() {
     const promise = getCart(user.token);
     promise.then((answer) => {
       setCartItemsArray(answer.data);
-      const teste = answer.data;
+      let teste = 0;
+      answer.data.forEach((item) => {
+        teste = Number(teste) + Number(item.totalValue);
+      });
+      teste = Number(teste);
+      console.log(teste, typeof teste);
 
-      for (let i = 0; i < teste.length; i = i + 1) {
-        return setTotalCounter(totalCounter + Number(teste.totalValue));
-      }
-      console.log(teste);
+      setTotalCounter(teste);
     });
     promise.catch((error) => {
       alert("Algo deu errado.");
@@ -52,7 +54,7 @@ export default function Cart() {
       <OrderBox>
         <div>
           <h6>Total: </h6>
-          <h4>R$ 123456789</h4>
+          <h4>R$ {totalCounter.toFixed(2)}</h4>
         </div>
 
         <div>
