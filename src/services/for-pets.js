@@ -74,15 +74,8 @@ function getCart(token) {
   });
 }
 
-function deleteItem(token, id) {
+function toDelete(token, id) {
   return axios.delete(`${BASE_URL}/cart/${id}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-}
-function decrementItem(token, body) {
-  return axios.put(`${BASE_URL}/cartitem`, body, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -127,6 +120,5 @@ export {
   postPurchase,
   postCart,
   getCart,
-  deleteItem,
-  decrementItem,
+  toDelete
 };

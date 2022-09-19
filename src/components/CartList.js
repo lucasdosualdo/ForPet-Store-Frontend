@@ -1,40 +1,30 @@
 import { useContext } from "react";
 import UserContext from "../contexts/UserContext";
 import styled from "styled-components";
-import { deleteItem, decrementItem } from "../services/for-pets";
+import { toDelete } from "../services/for-pets";
 import { useNavigate } from "react-router-dom";
 
 export default function CartList({ item, key, index }) {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
-  function decrement() {
+  function deleteItem() {
     if (!user.token) {
       alert("Sessão expirada. Faça o login novamente");
       return;
     }
-    if (item.quantify === 1) {
-      const promise = deleteItem(user.token, item.itemId);
+   
+      const promise = toDelete(user.token, item.itemId);
       promise.then((answer) => {
+        navigate('/home')
         console.log(answer.data);
       });
       promise.catch((error) => {
         console.log(error);
         alert("Não foi possível remover o item do carrinho.");
       });
-      return;
-    }
-    const body = {
-      itemId: item.itemId
-    }
-    const promise = decrementItem(user.token, body);
-    promise.then((answer) => {
-      console.log(answer.data);
-    });
-    promise.catch((error) => {
-      console.log(error);
-      alert("não foi possível diminuir a quantidade do item.");
-    });
+
+  
   }
 
   return (
@@ -46,18 +36,13 @@ export default function CartList({ item, key, index }) {
       <InfoContainer>
         <h5>{item.name}</h5>
         <PriceBox>
-          <h4>{`R$ ${item.price.replace(".", ",")}`}</h4>
-          <QuantItems>
-            <span>
-              <h5 onClick={decrement}>-</h5>
-            </span>
-            <span>
-              <h5>{item.quantify}</h5>
-            </span>
-            <span>
-              <h4>+</h4>
-            </span>
-          </QuantItems>
+          <h4>{`R$ ${item.totalValue}`}</h4>
+
+          <div>
+            <h6>{item.quantify}</h6>
+
+            <ion-icon name="trash" onClick = {deleteItem}></ion-icon>
+          </div>
         </PriceBox>
       </InfoContainer>
     </CartItem>
@@ -78,7 +63,11 @@ const InfoContainer = styled.div`
     width: 100%;
     word-wrap: break-word;
   }
-
+  h6 {
+    color: #15616d;
+    font-size: 24px;
+    font-weight: 700;
+  }
   h4 {
     color: #e8713c;
     font-size: 24px;
@@ -87,7 +76,7 @@ const InfoContainer = styled.div`
 `;
 
 const CartItem = styled.div`
-  width: 100%;
+  width: auto;
   background-color: white;
   height: auto;
   display: flex;
@@ -113,26 +102,37 @@ const PriceBox = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
+  ion-icon {
+    color: #a6a6a6;
+    margin-left: 10px;
+  }
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 const QuantItems = styled.div`
   border: 2px solid #cacaca;
-  width: 90px;
+
   height: 30px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   border-radius: 6px;
   align-items: center;
   text-align: center;
   bottom: 15px;
   right: 20px;
   padding: 0 5px;
-  h4 {
-    color: #15616d;
-    font-weight: 500;
-  }
+
   p {
     color: #a6a6a6;
     font-size: 20px;
+  }
+  span {
+    display: flex;
+    justify-content: center;
   }
 `;
