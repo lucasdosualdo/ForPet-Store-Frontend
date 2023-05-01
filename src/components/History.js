@@ -6,69 +6,69 @@ import UserContext from "../contexts/UserContext";
 import { getHistory } from "../services/for-pets";
 
 export default function History() {
-    const [history, setHistory] = useState([]);
-    const { user } = useContext(UserContext);
+  const [history, setHistory] = useState([]);
+  const { user } = useContext(UserContext);
 
-    useEffect(() => {
-        const promise = getHistory(user.token);
+  useEffect(() => {
+    const promise = getHistory(user.token);
 
-        promise.then(answer => {
-            setHistory(answer.data);
-        });
+    promise.then((answer) => {
+      setHistory(answer.data);
+      console.log(answer);
+    });
 
-        promise.catch(answer => {
-            alert(answer.response.data);
-        });
-    }, []);
+    promise.catch((answer) => {
+      alert(answer.response.data);
+    });
+  }, []);
 
-    return (
-        <Page>
-            <HistoryList>
-                {history.length === 0 ? (
-                    <p>Você ainda não fez nenhum pedido.</p>
-                ) : (
-                    
-                    <PastOrders history={history} />   
-                )}
-            </HistoryList>
-        </Page>
-    );
+  return (
+    <Page>
+      <HistoryList>
+        {history.length === 0 ? (
+          <p>Você ainda não fez nenhum pedido.</p>
+        ) : (
+          <PastOrders history={history} />
+        )}
+      </HistoryList>
+    </Page>
+  );
 }
 
 function PastOrders({ history }) {
-    return (
-        <>
-            {history.map((order, index) => (
-                <PastOrder 
-                    key={index}
-                    date={order.date}
-                    price={order.price}
-                    id={order.id}
-                />
-            ))}
-        </>
-    );
+  return (
+    <>
+      {history.map((order, index) => (
+        <PastOrder
+          key={index}
+          date={order.date}
+          price={order.totalValue}
+          id={order._id}
+        />
+      ))}
+    </>
+  );
 }
 
 function PastOrder({ date, price, id }) {
-    return (
-        <Link to={`/order/${id}?from=history`}>
-            <div>
-                <h4>{date}</h4>
-                <h5>{`R$ ${price.toString().replace('.', ',')}`}</h5>
-            </div>
-        </Link>
-    );
+  return (
+    <Link to={`/order/${id}`}>
+      <div>
+        <h4>{date}</h4>
+        <h5>{`R$ ${price.toString().replace(".", ",")}`}</h5>
+      </div>
+    </Link>
+  );
 }
 
 const HistoryList = styled.div`
-width: 100%;
-min-height: 100vh;
-display: flex;
-flex-direction: column;
-justify-content: start;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
 
-div {
+  div {
     width: 100wh;
     height: 50px;
     padding: 10px;
@@ -78,27 +78,27 @@ div {
     border-bottom: 1px solid #ffeed1;
     background-color: white;
     margin: 2px -15px;
-}
+  }
 
-h4 {
-    color: #A6A6A6;
+  h4 {
+    color: #a6a6a6;
     font-size: 20px;
-}
+  }
 
-h5 {
-    color: #E8713C;
+  h5 {
+    color: #e8713c;
     font-size: 20px;
     font-weight: 700;
-}
+  }
 
-a {
+  a {
     text-decoration: none;
-}
+  }
 
-p {
-        font-size: 20px;
-        line-height: 28px;
-        color: #A6A6A6;
-        margin-top: 20px;
-}
+  p {
+    font-size: 20px;
+    line-height: 28px;
+    color: #a6a6a6;
+    margin-top: 20px;
+  }
 `;

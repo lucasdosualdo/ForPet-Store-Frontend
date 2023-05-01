@@ -46,6 +46,10 @@ export default function Cart() {
       alert("Sessão expirada. Faça o login novamente");
       return;
     }
+    if (cartItemsArray.length === 0) {
+      alert("Você precisa adicionar pelo menos um item ao carrinho.");
+      return;
+    }
     const purchaseItemsArray = cartItemsArray.map((item) => ({
       itemId: item.itemId,
       quantify: item.quantify,
@@ -61,10 +65,7 @@ export default function Cart() {
     };
     const promise = postPurchase(user.token, body);
     promise.then((answer) => {
-      console.log(answer.data);
       toDelete(user.token, "checkout");
-      navigate("/home");
-      console.log(answer.data.insertedId);
       navigate(`/order/${answer.data.insertedId}`);
     });
     promise.catch((error) => {

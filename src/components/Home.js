@@ -19,7 +19,6 @@ export default function Home() {
   const filter = useLocation().search;
   const { setItemsContext } = useContext(UserContext);
   const [items, setItems] = useState([]);
-  console.log(user)
 
   function loadItems() {
     const promise = getItems(user.token, filter);

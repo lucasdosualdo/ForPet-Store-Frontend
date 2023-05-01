@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://projeto14-petstore-back.herokuapp.com";
+const BASE_URL = process.env.REACT_APP_URL;
 
 function postSignIn(body) {
   return axios.post(`${BASE_URL}/sign-in`, body);
