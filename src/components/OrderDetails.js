@@ -7,18 +7,18 @@ import { numberOfItems } from "../functions/globalFunctions";
 import Page from "../styles/Page";
 
 export default function OrderDetails() {
-  const orderId = useParams();
+  const { orderId } = useParams();
   const checkout = useLocation().search;
   const navigate = useNavigate();
   const [order, setOrder] = useState({ items: [] });
   const { user } = useContext(UserContext);
 
   useEffect(() => {
+    console.log(orderId);
     const promise = getOrder(user.token, orderId);
 
     promise.then((answer) => {
       setOrder(answer.data);
-      console.log(answer.data);
     });
 
     promise.catch((answer) => {
@@ -30,7 +30,8 @@ export default function OrderDetails() {
   if (order.items) {
     numItems = numberOfItems(order.items);
   } else {
-    console.log("deu ruim");
+    console.log(order);
+    alert("Por favor refaça o pedido");
   }
 
   return (
@@ -61,7 +62,7 @@ function List({ items }) {
           key={index}
           id={item.itemId}
           quantify={item.quantify}
-          value={item.value}
+          value={item.totalValue}
         />
       ))}
     </>
@@ -81,7 +82,7 @@ function Item({ id, quantify, value }) {
       <p>{item.name}</p>
       <span>
         <h6>{`Qtd: ${quantify}`}</h6>
-        <h5>{`R$ ${value.toString().replace(".", ",")}`}</h5>
+        <h5>{`R$ ${value?.toString().replace(".", ",")}`}</h5>
       </span>
     </div>
   );
