@@ -10,11 +10,10 @@ function Item({ info, loadItems, favorites, loadFavorites }) {
   const path = useLocation().pathname;
 
   function toggleFavorite() {
-    if (path === "/favorites") {
-      return;
-    }
-
-    const promise = postFavorite(user.token, { id: info._id });
+    const promise = postFavorite(
+      user.token,
+      path === "/favorites" ? { id: info.itemId } : { id: info._id }
+    );
 
     promise.then((answer) => {
       loadFavorites();
@@ -58,7 +57,6 @@ function List({ items, loadItems }) {
 
     promise.then((answer) => {
       setFavorites(answer.data);
-      console.log(answer.data);
     });
 
     promise.catch((answer) => {
