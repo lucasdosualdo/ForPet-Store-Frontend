@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+# ForPet-Store
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ForPet Store is a mobile ecommerce application for pet shops. In the app, users can experience an easy and enjoyable shopping experience for their pets.
 
-## Available Scripts
+<img src="/src/assets/preview-pictures/picture-1.png" width="230" /> <img src="/src/assets/preview-pictures/picture-2.png" width="230" /> <img src="/src/assets/preview-pictures/picture-3.png" width="230" /> <img src="/src/assets/preview-pictures/picture-4.png" width="230" /> <img src="/src/assets/preview-pictures/picture-5.png" width="230" /> <img src="/src/assets/preview-pictures/picture-6.png" width="230" /> <img src="/src/assets/preview-pictures/picture-7.png" width="230" /> <img src="/src/assets/preview-pictures/picture-8.png" width="230" />
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+### Registration and Login
+When opening the app, the user can either create a new account or login with their email and password if they already have one.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Homepage
+The homepage displays a variety of pet items, such as food, feeders, waterers, toys, collars, among others. At the top of the screen, there are icon options that represent different types of animals (dog, cat, bird, etc.). By clicking on an icon, options for items related to the chosen animal are displayed so that the user can navigate through different product categories.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Favorites
+Users have the option to add certain items to the "favorites" tab by clicking on the heart icon displayed on each item. This allows the user to save items of interest and come back to them later.
 
-### `npm test`
+### Product Details
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+By clicking on an item on the homepage, the user is taken to a page with more detailed information about that product, including images, description, and price. In addition, options are displayed to either buy the item or add it to the cart, as well as the ability to select the desired quantity of the item.
 
-### `npm run build`
+### Cart
+In the cart tab, all the items that the user added to the cart are displayed, along with their respective quantities, prices, and the option to delete a specific item from the cart. The total purchase amount of the items in the cart is also shown, along with the option to complete the purchase.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Main stacks
+The following tools and frameworks were used in the construction of the project:<br>
+<p>
+  <img style='margin: 5px;' src='https://img.shields.io/badge/styled-components%20-%2320232a.svg?&style=for-the-badge&color=b8679e&logo=styled-components&logoColor=%3a3a3a'>
+  <img style='margin: 5px;' src='https://img.shields.io/badge/axios%20-%2320232a.svg?&style=for-the-badge&color=informational'>
+  <img style='margin: 5px;' src="https://img.shields.io/badge/react-app%20-%2320232a.svg?&style=for-the-badge&color=60ddf9&logo=react&logoColor=%2361DAFB"/>
+  <img style='margin: 5px;' src="https://img.shields.io/badge/react_route%20-%2320232a.svg?&style=for-the-badge&logo=react&logoColor=%2361DAFB"/>
+</p>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## How to use the app
+Copy and paste the link below into your browser
+```bash
+project14-forpet-store-front.vercel.app
+```
+Note: adjust the screen size to a mobile dimension or access it through your phone.
 
-### `npm run eject`
+## How to run locally
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Clone this repository
+```bash
+git clone https://github.com/lucasdosualdo/ForPet-Store-Frontend
+```
+2. Clone the back-end repository at
+```bash
+git clone https://github.com/lucasdosualdo/ForPet-Store-Backend
+```
+3. Follow instructions to run back-end at
+```bash
+https://github.com/lucasdosualdo/ForPet-Store-Backend
+```
+4. Install the dependencies from project
+```bash
+npm install
+```
+5. Run the front-end with
+```bash
+npm start
+```
+6. You can optionally build the project running
+```bash
+npm run build
+```
+7. Finally, access http://localhost:5000 on your favorite browser.
